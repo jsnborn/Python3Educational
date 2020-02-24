@@ -1,0 +1,61 @@
+#ground shipping flat rate is equal to $20.00, function has weight parameter
+#premium shipping flat rate is equal to $125.00, no function thus no weight parameter
+#drone shipping does not have flat rate, function has weight parameter
+def ground_shipping(weight):
+
+  if weight <= 2:
+    price_per_pound = 1.50 
+  elif weight <= 6: 
+    price_per_pound = 3.00 
+  elif weight <= 10: 
+    price_per_pound = 4.00 
+  else: 
+    price_per_pound = 4.75 
+   
+  return 20.00 + (price_per_pound * weight)  
+
+##test 8.4lb package should cost $53.60
+print(ground_shipping(8.4))
+
+premium_shipping = 125.00
+
+def drone_shipping(weight):
+
+  if weight <= 2:
+    price_per_pound = 4.50 
+  elif weight <= 6: 
+    price_per_pound = 9.00 
+  elif weight <= 10: 
+    price_per_pound = 12.00 
+  else: 
+    price_per_pound = 14.25 
+   
+  return price_per_pound * weight  
+
+print(drone_shipping(1.5)) #test 1.5lb package should cost $6.75
+  
+def cheapest_ship_method(weight):
+  
+  ground = ground_shipping(weight)
+  premium = premium_shipping
+  drone = drone_shipping(weight)
+  
+  if ground < premium and ground < drone: 
+    method = "ground"
+    cost = ground 
+  elif premium < ground and premium < drone: 
+    method = "premium ground"
+    cost = premium 
+  else: 
+    method = "drone"
+    cost = drone
+    
+  print(
+    "The cheapest shipping method available is $%.2f with %s shipping."
+        % (cost, method)
+  )
+
+cheapest_ship_method(5)
+cheapest_ship_method(45)
+cheapest_ship_method(2)
+  
